@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAmbientLED", "OpenAmbientLED\OpenAmbientLED.csproj", "{20CF089E-7F18-4D7B-92D4-35FA89B1E483}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAmbientLED.ConsoleApp", "OpenAmbientLED.ConsoleApp\OpenAmbientLED.ConsoleApp.csproj", "{790EEDFA-33A7-44A1-9D42-2A80DB221798}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20CF089E-7F18-4D7B-92D4-35FA89B1E483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20CF089E-7F18-4D7B-92D4-35FA89B1E483}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20CF089E-7F18-4D7B-92D4-35FA89B1E483}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20CF089E-7F18-4D7B-92D4-35FA89B1E483}.Release|Any CPU.Build.0 = Release|Any CPU
+		{790EEDFA-33A7-44A1-9D42-2A80DB221798}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{790EEDFA-33A7-44A1-9D42-2A80DB221798}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{790EEDFA-33A7-44A1-9D42-2A80DB221798}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{790EEDFA-33A7-44A1-9D42-2A80DB221798}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23AFAF1E-E3AA-439E-AE6B-15E3F4691F55}
+	EndGlobalSection
+EndGlobal

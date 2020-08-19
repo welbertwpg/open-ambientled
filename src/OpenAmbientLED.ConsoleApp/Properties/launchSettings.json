@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "OpenAmbientLED.ConsoleApp": {
+      "commandName": "Project",
+      "commandLineArgs": "-h"
+    }
+  }
+}
