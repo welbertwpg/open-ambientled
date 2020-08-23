@@ -1,6 +1,6 @@
 # Open AmbientLED
 
-This started when I had some problems with the Gigabyte’s AmbientLED on my [Z390M Gaming](https://www.gigabyte.com/Motherboard/Z390-M-GAMING-rev-10#kf) motherboard. I wasn’t able to enable the RGB led without enabling the red led, which doesn’t make any sense. Then I decided to check if this was a software problem using the [ILSpy](https://github.com/icsharpcode/ILSpy) to decompile the original software, and to my surprise, I was right! It is a software problem. So, I’ve studied the code and did this one to solve this problem.
+This started when I had some problems with the Gigabyte’s AmbientLED on my [Z390M Gaming](https://www.gigabyte.com/Motherboard/Z390-M-GAMING-rev-10#kf) motherboard. I wasn’t able to enable the RGB led without enabling the red led(which doesn’t make any sense). Then I decided to check if this was a software problem using the [ILSpy](https://github.com/icsharpcode/ILSpy) to decompile the original software, and to my surprise, I was right! It is a software problem. So, I’ve studied the code and did this one to solve this problem.
 
 ## Usage
 

@@ -44,10 +44,8 @@ namespace OpenAmbientLED.ConsoleApp
             }
             catch (OptionException e)
             {
-                Console.Write("greet: ");
                 Console.WriteLine(e.Message);
-                Console.WriteLine("Try `greet --help' for more information.");
-                return;
+                Console.WriteLine("Try `--help' for more information.");
             }
         }
     }
