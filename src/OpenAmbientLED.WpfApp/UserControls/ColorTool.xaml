@@ -10,7 +10,7 @@
              xmlns:materialDesignColors="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=models:ColorToolViewModel}"
-             d:DesignHeight="600" d:DesignWidth="600">
+             d:DesignHeight="200" d:DesignWidth="600">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -40,7 +40,7 @@
             </Style>
 
             <DataTemplate DataType="{x:Type Color}" x:Key="SwatchColorTemplate">
-                <Button Height="40" Width="40" Background="{Binding Converter={StaticResource ColorToBrushConverter}}"
+                <Button Height="25" Width="25" Background="{Binding Converter={StaticResource ColorToBrushConverter}}"
                         Command="{Binding DataContext.ChangeHueCommand, RelativeSource={RelativeSource AncestorType=local:ColorTool}}" 
                         CommandParameter="{Binding}">
                     <Button.Style>
@@ -105,7 +105,7 @@
     <!-- Color picker section -->
     <DockPanel Margin="16">
         <UniformGrid Columns="1" DockPanel.Dock="Right">
-            <RadioButton x:Name="MdPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="True" Content="MD Palette"/>
+            <RadioButton x:Name="MdPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="True" Content="Palette"/>
             <RadioButton x:Name="CustomPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="False" Content="Custom"/>
         </UniformGrid>
         <Grid DockPanel.Dock="Left">
@@ -128,7 +128,8 @@
                     <StackPanel Orientation="Horizontal">
                         <StackPanel.Resources>
                             <Style TargetType="TextBlock">
-                                <Setter Property="Width" Value="40" />
+                                <Setter Property="FontSize" Value="9" />
+                                <Setter Property="Width" Value="25" />
                                 <Setter Property="Margin" Value="1 1 0 0" />
                                 <Setter Property="TextAlignment" Value="Center" />
                             </Style>
