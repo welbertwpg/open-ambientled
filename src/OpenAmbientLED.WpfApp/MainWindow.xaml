@@ -38,9 +38,7 @@
                     <TextBlock Margin="8,0,0,0"
                         Foreground="White"
                         VerticalAlignment="Center" 
-                        Style="{StaticResource MaterialDesignSubtitle1TextBlock}" 
-                        FontWeight="Medium" 
-                        FontSize="20" 
+                        Style="{StaticResource MaterialDesignSubtitle2TextBlock}" 
                         Text="Open AmbientLED"/>
                 </StackPanel>
             </DataTemplate>
