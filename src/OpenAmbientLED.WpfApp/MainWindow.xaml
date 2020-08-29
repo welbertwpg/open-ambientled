@@ -5,14 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:userControls="clr-namespace:OpenAmbientLED.WpfApp.UserControls"
-        xmlns:local="clr-namespace:OpenAmbientLED.WpfApp"
+        xmlns:enums="clr-namespace:OpenAmbientLED.WpfApp.Enums"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Open AmbientLED" Height="400" Width="600"
+        Title="Open AmbientLED" Height="370" Width="600"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
+        Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{materialDesign:MaterialDesignFont}">
-    <Grid>
-        <userControls:ColorTool HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="200" Width="600" ColorChanged="ColorTool_ColorChanged" />
-    </Grid>
+    <Window.Resources>
+        <ObjectDataProvider x:Key="AudioLedModes"
+                MethodName="GetValues"
+                ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enums:AudioLedMode"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="RgbLedModes"
+                MethodName="GetValues"
+                ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enums:RgbLedMode"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+
+    <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}">
+        <GroupBox.HeaderTemplate>
+            <DataTemplate>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Foreground="White" Kind="LedOn" Height="32" Width="32" VerticalAlignment="Center" />
+                    <TextBlock Margin="8,0,0,0"
+                        Foreground="White"
+                        VerticalAlignment="Center" 
+                        Style="{StaticResource MaterialDesignSubtitle1TextBlock}" 
+                        FontWeight="Medium" 
+                        FontSize="20" 
+                        Text="Open AmbientLED"/>
+                </StackPanel>
+            </DataTemplate>
+        </GroupBox.HeaderTemplate>
+        <StackPanel>
+                <DockPanel HorizontalAlignment="Center" Margin="10">
+                    <ComboBox SelectedItem="{Binding Path=SelectedRgbLedMode, Mode=TwoWay}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        materialDesign:HintAssist.Hint="RgbLed Mode"
+                        Width="200"
+                        Margin="5"
+                        ItemsSource="{Binding Source={StaticResource RgbLedModes}}" />
+                    <ComboBox SelectedItem="{Binding Path=SelectedAudioLedMode, Mode=TwoWay}" 
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        Width="200"
+                        Margin="5"
+                        materialDesign:HintAssist.Hint="AudioLed Mode"
+                        ItemsSource="{Binding Source={StaticResource AudioLedModes}}" />
+                </DockPanel>
+                <userControls:ColorTool
+                    HorizontalAlignment="Center"
+                    Height="200" 
+                    Width="600" 
+                    ColorChanged="ColorTool_ColorChanged" />
+            </StackPanel>
+    </GroupBox>
 </Window>
