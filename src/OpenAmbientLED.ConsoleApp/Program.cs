@@ -21,13 +21,16 @@ namespace OpenAmbientLED.ConsoleApp
 
                     if (argsObj.ChangeAudioLed && argsObj.Mode.HasValue)
                     {
-                        var audioled = new AudioLedController();
-                        audioled.SetMode(argsObj.Mode.Value);
+                        var audioled = AudioLedController.Create();
+                        if (audioled != null)
+                            audioled.SetMode(argsObj.Mode.Value);
                     }
 
                     if (argsObj.ChangeMonocLed)
                     {
-                        var monocLed = new MonocLedController();
+                        var monocLed = MonocLedController.Create();
+                        if (monocLed == null)
+                            return;
 
                         if (argsObj.Mode.HasValue)
                             monocLed.SetMode(argsObj.Mode.Value);

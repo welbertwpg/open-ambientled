@@ -16,8 +16,8 @@ namespace OpenAmbientLED.WpfApp
         private readonly IRgbLedController rgbLed;
         private readonly ILedController audioLed;
 
-        private readonly bool IsRgbLedAvailable;
-        private readonly bool IsAudioLedAvailable;
+        public bool IsRgbLedAvailable { get; }
+        public bool IsAudioLedAvailable { get; }
 
         private AudioLedMode _selectedAudioLedMode;
         public AudioLedMode SelectedAudioLedMode
@@ -45,24 +45,17 @@ namespace OpenAmbientLED.WpfApp
         {
             InvkSMBCtrl.LibInitial();
 
-            try
-            {
-                rgbLed = new MonocLedController();
-                IsRgbLedAvailable = rgbLed != null;
-            }
-            catch
-            {
-                IsRgbLedAvailable = false;
-            }
+            rgbLed = MonocLedController.Create();
+            IsRgbLedAvailable = rgbLed != null;
 
-            try
+            audioLed = AudioLedController.Create();
+            IsAudioLedAvailable = audioLed != null;
+
+            if (!IsAudioLedAvailable && !IsRgbLedAvailable)
             {
-                audioLed = new AudioLedController();
-                IsAudioLedAvailable = audioLed != null;
-            }
-            catch
-            {
-                IsAudioLedAvailable = false;
+                MessageBox.Show("Not supported!");
+                Application.Current.Shutdown();
+                return;
             }
 
             DataContext = this;

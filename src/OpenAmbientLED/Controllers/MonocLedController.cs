@@ -13,7 +13,20 @@ namespace OpenAmbientLED.Controllers
         private readonly uint ledIdv4;
         private readonly uint ledFuncType;
 
-        public MonocLedController()
+        public static IRgbLedController Create()
+        {
+            try
+            {
+                return new MonocLedController();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        private MonocLedController()
         {
             var ledIdv3 = InvkSMBCtrl.GetSIVId();
             ledIdv4 = InvkSMBCtrl.GetLEDId();

@@ -28,6 +28,7 @@
                 <x:Type TypeName="enums:RgbLedMode"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
     </Window.Resources>
 
     <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}">
@@ -46,23 +47,27 @@
         <StackPanel>
                 <DockPanel HorizontalAlignment="Center" Margin="10">
                     <ComboBox SelectedItem="{Binding Path=SelectedRgbLedMode, Mode=TwoWay}"
+                        Visibility="{Binding Path=IsRgbLedAvailable, Converter={StaticResource VisibleIfTrueConverter}}"
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                         materialDesign:HintAssist.Hint="RgbLed Mode"
                         Width="200"
                         Margin="5"
                         ItemsSource="{Binding Source={StaticResource RgbLedModes}}" />
                     <ComboBox SelectedItem="{Binding Path=SelectedAudioLedMode, Mode=TwoWay}" 
+                        Visibility="{Binding Path=IsAudioLedAvailable, Converter={StaticResource VisibleIfTrueConverter}}"
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                         Width="200"
                         Margin="5"
                         materialDesign:HintAssist.Hint="AudioLed Mode"
                         ItemsSource="{Binding Source={StaticResource AudioLedModes}}" />
                 </DockPanel>
-                <userControls:ColorTool
-                    HorizontalAlignment="Center"
-                    Height="200" 
-                    Width="600" 
-                    ColorChanged="ColorTool_ColorChanged" />
-            </StackPanel>
+                <DockPanel Visibility="{Binding Path=IsRgbLedAvailable, Converter={StaticResource VisibleIfTrueConverter}}">
+                    <userControls:ColorTool
+                        HorizontalAlignment="Center"
+                        Height="200" 
+                        Width="600" 
+                        ColorChanged="ColorTool_ColorChanged" />
+                </DockPanel>
+        </StackPanel>
     </GroupBox>
 </Window>

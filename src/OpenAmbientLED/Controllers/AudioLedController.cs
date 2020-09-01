@@ -13,15 +13,20 @@ namespace OpenAmbientLED.Controllers
         private readonly IT8620 controller;
         private readonly IEnumerable<LedMode> supportedModes = new[] { LedMode.Off, LedMode.Still, LedMode.Breath };
 
-        public void SetMode(LedMode mode)
+        public static ILedController Create()
         {
-            if (!supportedModes.Contains(mode))
-                throw new NotSupportedException("Mode not supported by AudioLed");
-
-            controller.SetLedMode_PinConfigType1(mode);
+            try
+            {
+                return new AudioLedController();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+                return null;
+            }
         }
 
-        public AudioLedController()
+        private AudioLedController()
         {
             var finder = new IT87XXFinder();
             for (int i = 0; i < 6; i++)
@@ -38,6 +43,14 @@ namespace OpenAmbientLED.Controllers
             }
 
             throw new NotSupportedException("The IT8620 controller wasn't found");
+        }
+
+        public void SetMode(LedMode mode)
+        {
+            if (!supportedModes.Contains(mode))
+                throw new NotSupportedException("Mode not supported by AudioLed");
+
+            controller.SetLedMode_PinConfigType1(mode);
         }
     }
 }
