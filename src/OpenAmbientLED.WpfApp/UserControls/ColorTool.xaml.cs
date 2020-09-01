@@ -22,8 +22,8 @@ namespace OpenAmbientLED.WpfApp.UserControls
             InitializeComponent();
         }
 
-        private Color? _selectedColor;
-        public Color? SelectedColor
+        private Color _selectedColor;
+        public Color SelectedColor
         {
             get => _selectedColor;
             set
@@ -32,9 +32,7 @@ namespace OpenAmbientLED.WpfApp.UserControls
                 {
                     _selectedColor = value;
                     OnPropertyChanged();
-
-                    if (value is Color color)
-                        OnColorChanged(color);
+                    OnColorChanged(value);
                 }
             }
         }
