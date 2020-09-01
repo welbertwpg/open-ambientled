@@ -5,11 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:converters="clr-namespace:OpenAmbientLED.WpfApp.Converters"
-             xmlns:models="clr-namespace:OpenAmbientLED.WpfApp.Models"
              xmlns:local="clr-namespace:OpenAmbientLED.WpfApp.UserControls"
              xmlns:materialDesignColors="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance Type=models:ColorToolViewModel}"
              d:DesignHeight="200" d:DesignWidth="600">
     <UserControl.Resources>
         <ResourceDictionary>
