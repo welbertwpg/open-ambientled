@@ -103,8 +103,8 @@
     <!-- Color picker section -->
     <DockPanel Margin="16">
         <UniformGrid Columns="1" DockPanel.Dock="Right">
-            <RadioButton x:Name="MdPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="True" Content="Palette"/>
-            <RadioButton x:Name="CustomPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="False" Content="Custom"/>
+            <RadioButton x:Name="MdPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" Checked="MdPaletteButton_Checked" Content="Palette"/>
+            <RadioButton x:Name="CustomPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" Checked="CustomPaletteButton_Checked" Content="Custom"/>
         </UniformGrid>
         <Grid DockPanel.Dock="Left">
             <Grid Visibility="{Binding IsChecked, ElementName=CustomPaletteButton, Converter={StaticResource BooleanToVisibilityConverter}}">

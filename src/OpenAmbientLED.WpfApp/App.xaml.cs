@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using OpenAmbientLED.External;
 using System.Windows;
 
 namespace OpenAmbientLED.WpfApp
@@ -13,5 +8,16 @@ namespace OpenAmbientLED.WpfApp
     /// </summary>
     public partial class App : Application
     {
+        internal static readonly OpenRgbConfiguration Configuration = OpenRgbConfiguration.Load();
+        public App()
+        {
+            InvkSMBCtrl.LibInitial();
+
+            Current.Exit += (sender, e) =>
+            {
+                Configuration.Save();
+                InvkSMBCtrl.SaveToBios();
+            };
+        }
     }
 }

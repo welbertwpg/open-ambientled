@@ -1,6 +1,5 @@
 ﻿using OpenAmbientLED.Controllers;
 using OpenAmbientLED.Enums;
-using OpenAmbientLED.External;
 using OpenAmbientLED.Interfaces;
 using OpenAmbientLED.WpfApp.Enums;
 using System.Windows;
@@ -19,32 +18,28 @@ namespace OpenAmbientLED.WpfApp
         public bool IsRgbLedAvailable { get; }
         public bool IsAudioLedAvailable { get; }
 
-        private AudioLedMode _selectedAudioLedMode;
         public AudioLedMode SelectedAudioLedMode
         {
-            get => _selectedAudioLedMode;
+            get => App.Configuration.AudioLedMode;
             set
             {
-                _selectedAudioLedMode = value;
-                audioLed.SetMode((LedMode)_selectedAudioLedMode);
+                App.Configuration.AudioLedMode = value;
+                audioLed.SetMode((LedMode)value);
             }
         }
 
-        private RgbLedMode _selectedRgbLedMode;
         public RgbLedMode SelectedRgbLedMode
         {
-            get => _selectedRgbLedMode;
+            get => App.Configuration.RgbLedMode;
             set
             {
-                _selectedRgbLedMode = value;
-                rgbLed.SetMode((LedMode)_selectedRgbLedMode);
+                App.Configuration.RgbLedMode = value;
+                rgbLed.SetMode((LedMode)value);
             }
         }
 
         public MainWindow()
         {
-            InvkSMBCtrl.LibInitial();
-
             rgbLed = MonocLedController.Create();
             IsRgbLedAvailable = rgbLed != null;
 
@@ -58,11 +53,25 @@ namespace OpenAmbientLED.WpfApp
                 return;
             }
 
+            LoadConfiguration();
+
             DataContext = this;
             InitializeComponent();
         }
 
-        private void ColorTool_ColorChanged(Color color)
+        private void LoadConfiguration()
+        {
+            if (IsAudioLedAvailable)
+                SelectedAudioLedMode = App.Configuration.AudioLedMode;
+
+            if (IsRgbLedAvailable)
+            {
+                SelectedRgbLedMode = App.Configuration.RgbLedMode;
+                SetColor(App.Configuration.Color);
+            }
+        }
+
+        private void SetColor(Color color)
         {
             int colorArgb = (color.A << 24) | (color.R << 16) | (color.G << 8) | color.B;
             rgbLed.SetColor((uint)colorArgb);

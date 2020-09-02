@@ -20,17 +20,20 @@ namespace OpenAmbientLED.WpfApp.UserControls
 
             DataContext = this;
             InitializeComponent();
+
+            MdPaletteButton.IsChecked = !App.Configuration.StartInCustomPaletteMode;
+            CustomPaletteButton.IsChecked = App.Configuration.StartInCustomPaletteMode;
         }
 
-        private Color _selectedColor;
         public Color SelectedColor
         {
-            get => _selectedColor;
+            get => App.Configuration.Color;
             set
             {
-                if (_selectedColor != value)
+                if (App.Configuration.Color != value)
                 {
-                    _selectedColor = value;
+                    App.Configuration.Color = value;
+
                     OnPropertyChanged();
                     OnColorChanged(value);
                 }
@@ -72,5 +75,11 @@ namespace OpenAmbientLED.WpfApp.UserControls
         public event ColorChangedEventHandler ColorChanged;
         protected virtual void OnColorChanged(Color color)
             => this.ColorChanged.Invoke(color);
+
+        private void MdPaletteButton_Checked(object sender, System.Windows.RoutedEventArgs e)
+            => App.Configuration.StartInCustomPaletteMode = false;
+
+        private void CustomPaletteButton_Checked(object sender, System.Windows.RoutedEventArgs e)
+            => App.Configuration.StartInCustomPaletteMode = true;
     }
 }
