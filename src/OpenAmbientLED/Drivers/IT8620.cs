@@ -240,7 +240,7 @@ namespace OpenAmbientLED.Drivers
                         WriteByte(RegisterPort, ValuePort, 194, 16);
                     }
                     break;
-                case LedMode.DFlash:
+                case LedMode.DoubleFlash:
                     if (changeDiv1)
                     {
                         WriteByte(RegisterPort, ValuePort, 176, 15);
@@ -390,7 +390,7 @@ namespace OpenAmbientLED.Drivers
                         WriteByte(RegisterPort, ValuePort, 194, 16);
                     }
                     break;
-                case LedMode.DFlash:
+                case LedMode.DoubleFlash:
                     if (changeDiv1)
                     {
                         WriteByte(RegisterPort, ValuePort, 176, 15);

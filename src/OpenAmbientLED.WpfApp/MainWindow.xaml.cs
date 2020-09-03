@@ -2,6 +2,7 @@
 using OpenAmbientLED.Enums;
 using OpenAmbientLED.Interfaces;
 using OpenAmbientLED.WpfApp.Enums;
+using OpenAmbientLED.WpfApp.Extensions;
 using System.Windows;
 using System.Windows.Media;
 
@@ -72,9 +73,6 @@ namespace OpenAmbientLED.WpfApp
         }
 
         private void SetColor(Color color)
-        {
-            int colorArgb = (color.A << 24) | (color.R << 16) | (color.G << 8) | color.B;
-            rgbLed.SetColor((uint)colorArgb);
-        }
+            => rgbLed.SetColor(color.GetHex());
     }
 }

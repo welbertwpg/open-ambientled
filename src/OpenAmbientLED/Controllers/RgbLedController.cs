@@ -143,7 +143,7 @@ namespace OpenAmbientLED.Controllers
                 case LedMode.Flash:
                     controller.SetLedMode_2(iDiv, 6, ledIdv4);
                     break;
-                case LedMode.DFlash:
+                case LedMode.DoubleFlash:
                     controller.SetLedMode_2(iDiv, 11, ledIdv4);
                     break;
                 case LedMode.Random:

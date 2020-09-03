@@ -8,7 +8,7 @@
         Beat = 4,
         ColorCycle = 12,
         Flash = 6,
-        DFlash = 11,
+        DoubleFlash = 11,
         Random = 7
     }
 }

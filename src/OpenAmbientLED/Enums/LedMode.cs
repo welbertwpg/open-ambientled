@@ -14,7 +14,7 @@ namespace OpenAmbientLED.Enums
 		Wave,
 		Scene,
 		Condition,
-		DFlash,
+		DoubleFlash,
 		ColorCycle
 	}
 }

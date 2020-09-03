@@ -1,4 +1,7 @@
-﻿using OpenAmbientLED.External;
+﻿using OpenAmbientLED.Controllers;
+using OpenAmbientLED.Enums;
+using OpenAmbientLED.External;
+using OpenAmbientLED.WpfApp.Extensions;
 using System.Windows;
 
 namespace OpenAmbientLED.WpfApp
@@ -13,7 +16,15 @@ namespace OpenAmbientLED.WpfApp
         {
             InvkSMBCtrl.LibInitial();
 
-            Current.Exit += (sender, e) => Configuration.Save();
+            var biosSettingsController = new BiosLedSettingsController();
+
+            Current.Exit += (sender, e) =>
+            {
+                Configuration.Save();
+
+                biosSettingsController.SetColor(Configuration.Color.GetHex());
+                biosSettingsController.SetMode((LedMode)Configuration.RgbLedMode);
+            };
         }
     }
 }
