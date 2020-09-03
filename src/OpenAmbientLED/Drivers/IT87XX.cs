@@ -119,14 +119,12 @@ namespace OpenAmbientLED.Drivers
         {
             InvkYcc.gb_outp(AddressRegister, register);
             byte result = InvkYcc.gb_inp(DataRegister);
+            
             if (chip == Chip.IT8688)
-            {
                 valid = true;
-            }
             else
-            {
-                valid = (register == InvkYcc.gb_inp(AddressRegister));
-            }
+                valid = register == InvkYcc.gb_inp(AddressRegister);
+
             return result;
         }
 
@@ -134,10 +132,10 @@ namespace OpenAmbientLED.Drivers
         {
             InvkYcc.gb_outp(AddressRegister, register);
             InvkYcc.gb_outp(DataRegister, value);
+            
             if (chip == Chip.IT8688)
-            {
                 return true;
-            }
+
             return register == InvkYcc.gb_inp(AddressRegister);
         }
     }
