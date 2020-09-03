@@ -40,7 +40,7 @@ namespace OpenAmbientLED.WpfApp
 
         public MainWindow()
         {
-            rgbLed = MonocLedController.Create();
+            rgbLed = RgbLedController.Create();
             IsRgbLedAvailable = rgbLed != null;
 
             audioLed = AudioLedController.Create();

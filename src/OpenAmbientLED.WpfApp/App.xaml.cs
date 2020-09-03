@@ -13,7 +13,7 @@ namespace OpenAmbientLED.WpfApp
         {
             InvkSMBCtrl.LibInitial();
 
-            Current.Exit += (sender, e) => Configuration.Save(); ;
+            Current.Exit += (sender, e) => Configuration.Save();
         }
     }
 }

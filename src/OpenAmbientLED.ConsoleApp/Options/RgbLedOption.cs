@@ -3,10 +3,10 @@ using System;
 
 namespace OpenAmbientLED.ConsoleApp.Options
 {
-    internal class MonocLedOption : Option
+    internal class RgbLedOption : Option
     {
         private readonly Action<bool> _action;
-        public MonocLedOption(Action<bool> action) : base("ml|mled|monocled", "set the configuration for monocled")
+        public RgbLedOption(Action<bool> action) : base("rgb", "set the configuration for rgbled")
         {
             _action = action;
         }

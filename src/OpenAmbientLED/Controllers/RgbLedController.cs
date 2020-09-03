@@ -7,7 +7,7 @@ using System;
 
 namespace OpenAmbientLED.Controllers
 {
-    public class MonocLedController : IRgbLedController
+    public class RgbLedController : IRgbLedController
     {
         private readonly MncLedCtrl controller;
         private readonly uint ledIdv4;
@@ -17,7 +17,7 @@ namespace OpenAmbientLED.Controllers
         {
             try
             {
-                return new MonocLedController();
+                return new RgbLedController();
             }
             catch (Exception e)
             {
@@ -26,7 +26,7 @@ namespace OpenAmbientLED.Controllers
             }
         }
 
-        private MonocLedController()
+        private RgbLedController()
         {
             var ledIdv3 = InvkSMBCtrl.GetSIVId();
             ledIdv4 = InvkSMBCtrl.GetLEDId();
