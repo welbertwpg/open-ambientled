@@ -61,7 +61,7 @@
                         materialDesign:HintAssist.Hint="AudioLed Mode"
                         ItemsSource="{Binding Source={StaticResource AudioLedModes}}" />
                 </DockPanel>
-                <DockPanel Visibility="{Binding Path=IsRgbLedAvailable, Converter={StaticResource VisibleIfTrueConverter}}">
+                <DockPanel Visibility="{Binding Path=ShowColorTool, Converter={StaticResource VisibleIfTrueConverter}}">
                     <userControls:ColorTool
                         HorizontalAlignment="Center"
                         Height="200" 

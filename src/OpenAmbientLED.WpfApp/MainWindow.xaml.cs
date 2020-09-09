@@ -3,6 +3,7 @@ using OpenAmbientLED.Enums;
 using OpenAmbientLED.Interfaces;
 using OpenAmbientLED.WpfApp.Enums;
 using OpenAmbientLED.WpfApp.Extensions;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 
@@ -11,13 +12,32 @@ namespace OpenAmbientLED.WpfApp
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private readonly IRgbLedController rgbLed;
         private readonly ILedController audioLed;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public bool IsRgbLedAvailable { get; }
         public bool IsAudioLedAvailable { get; }
+        public bool ShowColorTool { get => IsColorToolSupported(); }
+
+        private bool IsColorToolSupported()
+        {
+            if (!IsRgbLedAvailable)
+                return false;
+
+            switch (SelectedRgbLedMode)
+            {
+                case RgbLedMode.Off:
+                case RgbLedMode.ColorCycle:
+                case RgbLedMode.Random:
+                    return false;
+            }
+
+            return true;
+        }
 
         public AudioLedMode SelectedAudioLedMode
         {
@@ -36,6 +56,11 @@ namespace OpenAmbientLED.WpfApp
             {
                 App.Configuration.RgbLedMode = value;
                 rgbLed.SetMode((LedMode)value);
+
+                if (IsColorToolSupported())
+                    SetColor(App.Configuration.Color);
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShowColorTool)));
             }
         }
 

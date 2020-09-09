@@ -36,6 +36,7 @@ namespace OpenAmbientLED.Controllers
                 switch (mode)
                 {
                     case LedMode.Off:
+                        Off:
                         InvkCled.piSetAzaliaLedMode(0);
                         InvkCled.piSetBiosOnOff(0);
                         break;
@@ -59,6 +60,8 @@ namespace OpenAmbientLED.Controllers
                         InvkCled.piSetAzaliaLedMode(5);
                         InvkCled.piSetBiosOnOff(1);
                         break;
+                    default:
+                        goto Off;
                 }
                 InvkCled.piSetFunction();
             }
