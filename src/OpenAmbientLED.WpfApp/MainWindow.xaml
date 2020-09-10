@@ -9,12 +9,13 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
-        Title="Open AmbientLED" Height="370" Width="600"
+        Title="Open AmbientLED" Height="330" Width="600"
+        WindowStyle="None" ResizeMode="NoResize"
+        MouseDown="MoveWindow"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Medium"
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{materialDesign:MaterialDesignFont}"
-        ResizeMode="CanMinimize">
+        FontFamily="{materialDesign:MaterialDesignFont}">
     
     <Window.Resources>
         <ObjectDataProvider x:Key="AudioLedModes"
@@ -38,14 +39,29 @@
         <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}">
             <GroupBox.HeaderTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Foreground="White" Kind="LedOn" Height="32" Width="32" VerticalAlignment="Center" />
+                    <DockPanel>
+                        <Image Source="/icon.ico" Height="32" Width="32" VerticalAlignment="Center" />
+
                         <TextBlock Margin="8,0,0,0"
                             Foreground="White"
                             VerticalAlignment="Center" 
                             Style="{StaticResource MaterialDesignSubtitle2TextBlock}" 
                             Text="Open AmbientLED"/>
-                    </StackPanel>
+
+                        <Button
+                            Style="{StaticResource MaterialDesignIconForegroundButton}"
+                            Foreground="White"
+                            Click="Hide"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center" 
+                            Width="22"
+                            Height="22">
+                            <materialDesign:PackIcon
+                                Kind="CloseCircle"
+                                Height="20"
+                                Width="20" />
+                        </Button>
+                    </DockPanel>
                 </DataTemplate>
             </GroupBox.HeaderTemplate>
             <StackPanel>

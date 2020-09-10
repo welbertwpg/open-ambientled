@@ -6,6 +6,7 @@ using OpenAmbientLED.WpfApp.Extensions;
 using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace OpenAmbientLED.WpfApp
@@ -54,21 +55,11 @@ namespace OpenAmbientLED.WpfApp
             e.Cancel = true;
             WindowState = WindowState.Minimized;
         }
+        protected override void OnActivated(EventArgs e)
+            => TaskbarIcon.Visibility = Visibility.Collapsed;
 
-        protected override void OnStateChanged(EventArgs e)
-        {
-            if (WindowState == WindowState.Minimized)
-            {
-                TaskbarIcon.Visibility = Visibility.Visible;
-                ShowInTaskbar = false;
-            }
-            else
-            {
-                TaskbarIcon.Visibility = Visibility.Collapsed;
-                ShowInTaskbar = true;
-                Topmost = true;
-            }
-        }
+        protected override void OnDeactivated(EventArgs e)
+            => TaskbarIcon.Visibility = Visibility.Visible;
 
         public MainWindow()
         {
@@ -87,11 +78,10 @@ namespace OpenAmbientLED.WpfApp
 
             LoadConfiguration();
 
-            WindowState = WindowState.Minimized;
-            ShowInTaskbar = false;
-
             DataContext = this;
             InitializeComponent();
+
+            Hide();
         }
 
         private bool IsColorToolSupported()
@@ -126,9 +116,18 @@ namespace OpenAmbientLED.WpfApp
             => rgbLed.SetColor(color.GetHex());
 
         private void Open(object sender, RoutedEventArgs e)
-            => WindowState = WindowState.Normal;
+            => Show();
+
+        private void Hide(object sender, RoutedEventArgs e)
+            => Hide();
 
         private void Shutdown(object sender, RoutedEventArgs e)
             => Application.Current.Shutdown();
+
+        private void MoveWindow(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
     }
 }
