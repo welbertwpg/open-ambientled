@@ -57,12 +57,17 @@ namespace OpenAmbientLED.WpfApp
 
         protected override void OnStateChanged(EventArgs e)
         {
-            var minimized = WindowState == WindowState.Minimized;
-            TaskbarIcon.Visibility = minimized ? Visibility.Visible : Visibility.Collapsed;
-
-            ShowInTaskbar = !minimized;
-            if (ShowInTaskbar)
+            if (WindowState == WindowState.Minimized)
+            {
+                TaskbarIcon.Visibility = Visibility.Visible;
+                ShowInTaskbar = false;
+            }
+            else
+            {
+                TaskbarIcon.Visibility = Visibility.Collapsed;
+                ShowInTaskbar = true;
                 Topmost = true;
+            }
         }
 
         public MainWindow()
