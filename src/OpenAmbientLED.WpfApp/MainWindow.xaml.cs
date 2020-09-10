@@ -3,6 +3,7 @@ using OpenAmbientLED.Enums;
 using OpenAmbientLED.Interfaces;
 using OpenAmbientLED.WpfApp.Enums;
 using OpenAmbientLED.WpfApp.Extensions;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
@@ -17,27 +18,9 @@ namespace OpenAmbientLED.WpfApp
         private readonly IRgbLedController rgbLed;
         private readonly ILedController audioLed;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public bool IsRgbLedAvailable { get; }
         public bool IsAudioLedAvailable { get; }
         public bool ShowColorTool { get => IsColorToolSupported(); }
-
-        private bool IsColorToolSupported()
-        {
-            if (!IsRgbLedAvailable)
-                return false;
-
-            switch (SelectedRgbLedMode)
-            {
-                case RgbLedMode.Off:
-                case RgbLedMode.ColorCycle:
-                case RgbLedMode.Random:
-                    return false;
-            }
-
-            return true;
-        }
 
         public AudioLedMode SelectedAudioLedMode
         {
@@ -64,6 +47,24 @@ namespace OpenAmbientLED.WpfApp
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = true;
+            WindowState = WindowState.Minimized;
+        }
+
+        protected override void OnStateChanged(EventArgs e)
+        {
+            var minimized = WindowState == WindowState.Minimized;
+            TaskbarIcon.Visibility = minimized ? Visibility.Visible : Visibility.Collapsed;
+
+            ShowInTaskbar = !minimized;
+            if (ShowInTaskbar)
+                Topmost = true;
+        }
+
         public MainWindow()
         {
             rgbLed = RgbLedController.Create();
@@ -81,8 +82,27 @@ namespace OpenAmbientLED.WpfApp
 
             LoadConfiguration();
 
+            WindowState = WindowState.Minimized;
+            ShowInTaskbar = false;
+
             DataContext = this;
             InitializeComponent();
+        }
+
+        private bool IsColorToolSupported()
+        {
+            if (!IsRgbLedAvailable)
+                return false;
+
+            switch (SelectedRgbLedMode)
+            {
+                case RgbLedMode.Off:
+                case RgbLedMode.ColorCycle:
+                case RgbLedMode.Random:
+                    return false;
+            }
+
+            return true;
         }
 
         private void LoadConfiguration()
@@ -99,5 +119,11 @@ namespace OpenAmbientLED.WpfApp
 
         private void SetColor(Color color)
             => rgbLed.SetColor(color.GetHex());
+
+        private void Open(object sender, RoutedEventArgs e)
+            => WindowState = WindowState.Normal;
+
+        private void Shutdown(object sender, RoutedEventArgs e)
+            => Application.Current.Shutdown();
     }
 }
