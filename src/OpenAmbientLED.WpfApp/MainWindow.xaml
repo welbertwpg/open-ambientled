@@ -16,7 +16,7 @@
         TextElement.FontWeight="Medium"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{materialDesign:MaterialDesignFont}">
-    
+
     <Window.Resources>
         <ObjectDataProvider x:Key="AudioLedModes"
             MethodName="GetValues"
@@ -91,11 +91,24 @@
             </StackPanel>
         </GroupBox>
 
-        <tb:TaskbarIcon ToolTipText="Open AmbientLED"
+        <tb:TaskbarIcon
             IconSource="/icon.ico"
             MenuActivation="RightClick"
             TrayMouseDoubleClick="Open"
             x:Name="TaskbarIcon">
+
+            <tb:TaskbarIcon.TrayToolTip>
+                <Border
+                    Background="White"
+                    Width="110"
+                    Height="20"
+                    BorderThickness="1">
+                    <TextBlock
+                        Text="Open AmbientLED"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                </Border>
+            </tb:TaskbarIcon.TrayToolTip>
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Open" Click="Open" />
