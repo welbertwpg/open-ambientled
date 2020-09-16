@@ -1,4 +1,5 @@
-﻿using OpenAmbientLED.Controllers;
+﻿using Microsoft.Win32;
+using OpenAmbientLED.Controllers;
 using OpenAmbientLED.Enums;
 using OpenAmbientLED.Interfaces;
 using OpenAmbientLED.WpfApp.Enums;
@@ -61,6 +62,16 @@ namespace OpenAmbientLED.WpfApp
         protected override void OnDeactivated(EventArgs e)
             => TaskbarIcon.Visibility = Visibility.Visible;
 
+        private void OnPowerModeChanged(object sender, PowerModeChangedEventArgs e)
+        {
+            switch (e.Mode)
+            {
+                case PowerModes.Resume:
+                    LoadConfiguration();
+                    break;
+            }
+        }
+
         public MainWindow()
         {
             rgbLed = RgbLedController.Create();
@@ -75,6 +86,8 @@ namespace OpenAmbientLED.WpfApp
                 Application.Current.Shutdown();
                 return;
             }
+
+            SystemEvents.PowerModeChanged += OnPowerModeChanged;
 
             LoadConfiguration();
 
