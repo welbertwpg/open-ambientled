@@ -80,6 +80,7 @@
                         Margin="5"
                         materialDesign:HintAssist.Hint="AudioLed Mode"
                         ItemsSource="{Binding Source={StaticResource AudioLedModes}}" />
+                    <CheckBox IsChecked="{Binding Path=StartMinimized, Mode=TwoWay}" Content="Start Minimized" />
                 </DockPanel>
                 <DockPanel Visibility="{Binding Path=ShowColorTool, Converter={StaticResource VisibleIfTrueConverter}}">
                     <userControls:ColorTool

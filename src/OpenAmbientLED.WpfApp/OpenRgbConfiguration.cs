@@ -31,6 +31,7 @@ namespace OpenAmbientLED.WpfApp
         public RgbLedMode RgbLedMode { get; set; }
         public Color Color { get; set; }
         public bool StartInCustomPaletteMode { get; set; }
+        public bool StartMinimized { get; set; }
 
         public void Save()
             => Save(this);

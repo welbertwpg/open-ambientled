@@ -22,6 +22,11 @@ namespace OpenAmbientLED.WpfApp
 
         public bool IsRgbLedAvailable { get; }
         public bool IsAudioLedAvailable { get; }
+        public bool StartMinimized
+        {
+            get => App.Configuration.StartMinimized;
+            set => App.Configuration.StartMinimized = value;
+        }
         public bool ShowColorTool { get => IsColorToolSupported(); }
 
         public AudioLedMode SelectedAudioLedMode
@@ -89,12 +94,10 @@ namespace OpenAmbientLED.WpfApp
 
             SystemEvents.PowerModeChanged += OnPowerModeChanged;
 
-            LoadConfiguration();
-
             DataContext = this;
             InitializeComponent();
 
-            Hide();
+            LoadConfiguration();
         }
 
         private bool IsColorToolSupported()
@@ -123,6 +126,9 @@ namespace OpenAmbientLED.WpfApp
                 SelectedRgbLedMode = App.Configuration.RgbLedMode;
                 SetColor(App.Configuration.Color);
             }
+
+            if (StartMinimized)
+                Hide();
         }
 
         private void SetColor(Color color)
