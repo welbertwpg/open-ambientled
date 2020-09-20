@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>oambientled</AssemblyName>
     <Authors>Welbert Gomides</Authors>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 

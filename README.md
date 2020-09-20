@@ -1,6 +1,10 @@
 # Open AmbientLED
 
-This started when I had some problems with the Gigabyte’s AmbientLED on my [Z390M Gaming](https://www.gigabyte.com/Motherboard/Z390-M-GAMING-rev-10#kf) motherboard. I wasn’t able to enable the RGB led without enabling the red led(which doesn’t make any sense). Then I decided to check if this was a software problem using the [ILSpy](https://github.com/icsharpcode/ILSpy) to decompile the original software, and to my surprise, I was right! It is a software problem. So, I’ve studied the code and did this one to solve this problem.
+This started when I had some problems with Gigabyte’s AmbientLED on my [Z390M Gaming](https://www.gigabyte.com/Motherboard/Z390-M-GAMING-rev-10#kf) motherboard. I wasn’t able to use the RGB led without enabling the red led(which doesn’t make sense). Then I decided to check if this was a software problem using the [ILSpy](https://github.com/icsharpcode/ILSpy) to decompile the original software, and it's kind off, you can change the led modes individually, but you can't save this configuration to BIOS since they use only one configuration for both leds.
+
+Then I made this console app to manipulate this configurations, with this you'll be able to write your own scripts and run them at Windows Startup with a tool like the Windows Task Scheduler.
+
+I've been working in a Wpf application that will start with Windows too, and I expect to release it ASAP.
 
 ## Usage
 
@@ -15,14 +19,14 @@ $: oambientled.exe [OPTIONS]
 First, you must select the led that you want to change:
 
 ```text
---ml, --mled, --monocled
-    set the configuration for monocled
+--rgb
+    set the configuration for rgb led
 
---al, --aled, --audioled
-    set the configuration for audioled
+--a, --audio
+    set the configuration for audio led
 ```
 
-> The Audio Led you can only change the mode, and for the other led(MonocLed) you can change either the mode or color
+> The Audio Led you can only change the mode, and for the rgb led you can change either the mode or color
 
 Then you write the options:
 
@@ -40,5 +44,5 @@ Then you write the options:
 __Example__:
 
 ```bash
-$: oambientled.exe --al --ml -m still -c blue
+$: oambientled.exe --a --rgb -m still -c blue
 ```
