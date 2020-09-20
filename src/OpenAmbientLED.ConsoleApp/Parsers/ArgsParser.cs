@@ -12,7 +12,7 @@ namespace OpenAmbientLED.ConsoleApp.Parsers
             var options = new OptionSet {
                 new ModeOption((m) => argsObj.Mode = m),
                 new ColorOption((c) => argsObj.Color = c),
-                new MonocLedOption((b) => argsObj.ChangeMonocLed = b),
+                new RgbLedOption((b) => argsObj.ChangeRgbLed = b),
                 new AudioLedOption((b) => argsObj.ChangeAudioLed = b),
                 new HelpOption(),
             };

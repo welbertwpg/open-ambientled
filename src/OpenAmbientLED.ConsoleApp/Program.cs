@@ -15,29 +15,32 @@ namespace OpenAmbientLED.ConsoleApp
             {
                 var argsObj = ArgsParser.Parse(args);
 
-                if (argsObj.ChangeAudioLed || argsObj.ChangeMonocLed)
+                if (argsObj.ChangeAudioLed || argsObj.ChangeRgbLed)
                 {
                     InvkSMBCtrl.LibInitial();
 
                     if (argsObj.ChangeAudioLed && argsObj.Mode.HasValue)
                     {
-                        var audioled = new AudioLedController();
-                        audioled.SetMode(argsObj.Mode.Value);
+                        var audioled = AudioLedController.Create();
+                        if (audioled != null)
+                            audioled.SetMode(argsObj.Mode.Value);
                     }
 
-                    if (argsObj.ChangeMonocLed)
+                    if (argsObj.ChangeRgbLed)
                     {
-                        var monocLed = new MonocLedController();
+                        var rgbled = RgbLedController.Create();
+                        if (rgbled == null)
+                            return;
 
                         if (argsObj.Mode.HasValue)
-                            monocLed.SetMode(argsObj.Mode.Value);
+                            rgbled.SetMode(argsObj.Mode.Value);
 
                         if (argsObj.Color.HasValue)
                         {
                             if (argsObj.Mode == LedMode.Off || argsObj.Mode == LedMode.Unknown)
                                 return;
 
-                            monocLed.SetColor(argsObj.Color.Value);
+                            rgbled.SetColor(argsObj.Color.Value);
                         }
                     }
                 }

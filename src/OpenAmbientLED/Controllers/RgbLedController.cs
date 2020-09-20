@@ -7,13 +7,26 @@ using System;
 
 namespace OpenAmbientLED.Controllers
 {
-    public class MonocLedController : IRgbLedController
+    public class RgbLedController : IRgbLedController
     {
         private readonly MncLedCtrl controller;
         private readonly uint ledIdv4;
         private readonly uint ledFuncType;
 
-        public MonocLedController()
+        public static IRgbLedController Create()
+        {
+            try
+            {
+                return new RgbLedController();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        private RgbLedController()
         {
             var ledIdv3 = InvkSMBCtrl.GetSIVId();
             ledIdv4 = InvkSMBCtrl.GetLEDId();
@@ -130,7 +143,7 @@ namespace OpenAmbientLED.Controllers
                 case LedMode.Flash:
                     controller.SetLedMode_2(iDiv, 6, ledIdv4);
                     break;
-                case LedMode.DFlash:
+                case LedMode.DoubleFlash:
                     controller.SetLedMode_2(iDiv, 11, ledIdv4);
                     break;
                 case LedMode.Random:

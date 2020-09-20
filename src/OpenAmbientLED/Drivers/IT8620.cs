@@ -97,8 +97,6 @@ namespace OpenAmbientLED.Drivers
             GpioAddress = gpioAddress;
             RegisterPort = REGISTER_PORTS[0];
             ValuePort = VALUE_PORTS[0];
-            byte b = ReadByte(88, out bool valid);
-            if (valid && b == 144 && (ReadByte(0, out valid) & 0x10) != 0) { }
         }
 
         public void SetLedMode_PinConfigType1(LedMode pMode)
@@ -242,7 +240,7 @@ namespace OpenAmbientLED.Drivers
                         WriteByte(RegisterPort, ValuePort, 194, 16);
                     }
                     break;
-                case LedMode.DFlash:
+                case LedMode.DoubleFlash:
                     if (changeDiv1)
                     {
                         WriteByte(RegisterPort, ValuePort, 176, 15);
@@ -392,7 +390,7 @@ namespace OpenAmbientLED.Drivers
                         WriteByte(RegisterPort, ValuePort, 194, 16);
                     }
                     break;
-                case LedMode.DFlash:
+                case LedMode.DoubleFlash:
                     if (changeDiv1)
                     {
                         WriteByte(RegisterPort, ValuePort, 176, 15);
