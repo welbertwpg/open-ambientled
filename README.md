@@ -4,7 +4,7 @@ This started when I had some problems with Gigabyte’s AmbientLED on my [Z390M 
 
 Then I made this console app to manipulate this configurations, with this you'll be able to write your own scripts and run them at Windows Startup with a tool like the Windows Task Scheduler.
 
-I've been working in a Wpf application that will start with Windows too, and I expect to release it ASAP.
+I've been working on a WPF application as well, but still needs an installer and I'm not doing someone now.
 
 ## Usage
 
